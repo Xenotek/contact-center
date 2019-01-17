@@ -16,11 +16,11 @@ const fetchGroupsFailure = (err) => ({
 })
 
 export const fetchGroups = () => dispatch => {
-    dispatch(fetchGroupsRequest());
+    dispatch(fetchGroupsRequest())
 
     return API.fetchGroups()
         .then(res => {
-            console.log('res', res);
+            // console.log('res', res)
             if(res.status === 200){
                 dispatch(fetchGroupsSuccess(res))
             }else {

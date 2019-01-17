@@ -6,7 +6,7 @@ export class Groups extends React.PureComponent {
 
     componentDidMount() {
 
-        this.props.fetchGroups();
+        this.props.fetchGroups()
     }
 
     render() {
@@ -34,4 +34,5 @@ const mapStateToProps = (state) => {
         loading: state.fetchGroups.isFetching
     }
 }
+
 export default connect(mapStateToProps, {fetchGroups})(Groups)
