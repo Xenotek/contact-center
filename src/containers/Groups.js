@@ -5,7 +5,6 @@ import { fetchGroups } from '../actions'
 export class Groups extends React.PureComponent {
 
     componentDidMount() {
-
         this.props.fetchGroups()
     }
 

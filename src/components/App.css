@@ -35,14 +35,14 @@ html {
 .popup__inner {
   position: absolute;
   margin: 0;
-  top: 20%;
+  top: 40%;
   right: 0;
   left: 50%;
   z-index: 20;
   width: 85%;
   min-width: 280px;
   max-width: 800px;
-  min-height: 100px;
+  min-height: 450px;
   background: #ffffff;
   border-radius: 4px;
   transform: translate(-50%, -50%);
@@ -86,9 +86,30 @@ button {
   border: none;
 }
 
+input, textarea{
+  background: #CEE6F2;
+  border: 1px solid #CEE6F2;
+}
+textarea{
+  resize: none;
+  padding: 10px;
+}
+
+.popup-add{
+  display: flex;
+  padding: 15px;
+}
+.popup-add__description{
+  flex: 1;
+  margin: 0 15px;
+}
 
 
-
+.popup-add__buttons{
+  display: flex;
+  flex-direction: column;
+  width: 110px;
+}
 
 
 

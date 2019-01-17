@@ -25,6 +25,31 @@ const fetchGroups = (state = {isLoading: false, groups: []}, action) => {
     }
 }
 
+const createGroup = (state = {isLoading: false, groups: []}, action) => {
+    switch (action.type) {
+        case type.CREATE_GROUP_REQUEST:
+            return {
+                ...state,
+                isFetching: true
+            }
+        case type.CREATE_GROUP_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                groups: action.items,
+            }
+        case type.CREATE_GROUP_FAILURE:
+            return {
+                ...state,
+                err: action.err,
+                isFetching: false
+            }
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
-    fetchGroups
+    fetchGroups,
+    createGroup
 })
