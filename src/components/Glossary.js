@@ -1,7 +1,7 @@
 import React from 'react'
 import Groups from '../containers/Groups';
 // import SearchBar from '../containers/SearchBar';
-import CreateGroup from '../containers/CreateGroup';
+import AddGroup from '../containers/AddGroup';
 import ButtonLink from '../components/ButtonLink';
 
 export class Glossary extends React.Component {
@@ -10,13 +10,14 @@ export class Glossary extends React.Component {
     }
 
     openAddPopup = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         this.setState({
             isAdding: true
         });
     }
+
     closeAddPopup = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         this.setState({
             isAdding: false
         });
@@ -28,8 +29,8 @@ export class Glossary extends React.Component {
             <div className="glossary">
                 {/*<SearchBar />*/}
                 <Groups />
-                { !isAdding && <ButtonLink onClick={this.openAddPopup}>Добавить термин / группу терминов</ButtonLink> }
-                { isAdding && <CreateGroup closeAddPopup={this.closeAddPopup} /> }
+                { !isAdding && <div className="glossary__buttons"><ButtonLink variant="icon-add" onClick={this.openAddPopup}>Добавить термин / группу терминов</ButtonLink></div> }
+                { isAdding && <AddGroup closeAddPopup={this.closeAddPopup} /> }
             </div>
         )
     }

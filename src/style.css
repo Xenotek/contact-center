@@ -64,7 +64,6 @@ html {
 
 button {
   font-size: 14px;
-  text-transform: uppercase;
   border-radius: 3px;
   cursor: pointer;
   background: #42ABE1;
@@ -73,10 +72,41 @@ button {
   color: #ffffff;
   outline: none;
 }
+.button-link{
+  position: relative;
+  background: none;
+  border: none;
+  color: #0076B2;
+  padding: 0;
+  /*margin-left: 10px;*/
+}
+.button-link span{
+  display: inline-block;
+  border-bottom: 1px dashed;
+  margin-left: 3px;
+}
+.button-grey{
+  color: #777;
+}
+
+.icon-ok:before{
+  content: '\2714';
+}
+.icon-cancel:before{
+  content: '\2716';
+  font-size: 13px;
+}
+.icon-add:before{
+  content: '+';
+  font-weight: bold;
+}
+
+
 
 .button-remove{
   background: #E86858;
   border: 1px solid red;
+  text-transform: uppercase;
 }
 
 .button-close{
@@ -108,10 +138,14 @@ textarea{
 .popup-add__buttons{
   display: flex;
   flex-direction: column;
-  width: 110px;
+  width: 100px;
+  align-items: flex-start;
+  margin: 0 10px;
 }
 
-
+.glossary__buttons{
+  margin: 15px;
+}
 
 
 

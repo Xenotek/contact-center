@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import * as type from '../constants'
 
-const fetchGroups = (state = {isLoading: false, groups: []}, action) => {
+const fetchGroups = (state = {isFetching: false, groups: []}, action) => {
     switch (action.type) {
         case type.FETCH_GROUPS_REQUEST:
             return {
@@ -25,7 +25,7 @@ const fetchGroups = (state = {isLoading: false, groups: []}, action) => {
     }
 }
 
-const createGroup = (state = {isLoading: false, groups: []}, action) => {
+const createGroup = (state = {isFetching: false, groups: []}, action) => {
     switch (action.type) {
         case type.CREATE_GROUP_REQUEST:
             return {
