@@ -61,11 +61,8 @@ const createGroupFailure = (err) => ({
 export const createGroup = (data) => dispatch => {
     dispatch(createGroupRequest())
 
-    console.log('createGroup', data);
-
     API.createGroup(data)
         .then(res => {
-            console.log('res',res);
             if (res.status === 200) {
                 dispatch(createGroupSuccess(res))
                 dispatch(fetchGroups())
@@ -95,12 +92,10 @@ const updateGroupFailure = (err) => ({
 
 export const updateGroup = (data) => dispatch => {
     dispatch(updateGroupRequest())
-    console.log('updateGroup', data);
 
     API.updateGroup(data)
         .then(res => {
-            console.log('res',res);
-            if (res.status === 201) {
+            if (res.status === 200) {
                 dispatch(updateGroupSuccess(res))
                 dispatch(fetchGroups())
             } else {
@@ -129,10 +124,9 @@ const deleteGroupFailure = (err) => ({
 
 export const deleteGroup = (data) => dispatch => {
     dispatch(deleteGroupRequest())
-// console.log('deleteGroup', data);
+
     API.deleteGroup(data)
         .then(res => {
-            console.log('res',res);
             if (res.status === 200) {
                 dispatch(deleteGroupSuccess(res))
                 dispatch(fetchGroups())

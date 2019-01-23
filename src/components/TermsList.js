@@ -1,13 +1,4 @@
 import React from 'react'
-// import ButtonLink from '../components/ButtonLink';
-
-const Term = (props) => {
-    return (
-        <div className="terms__item">
-            {props.title}
-        </div>
-    )
-}
 
 const TermsList = (props) => {
 

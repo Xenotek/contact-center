@@ -7,7 +7,7 @@ import ModalContainer from '../containers/Modal'
 
 class App extends Component {
     state = {
-        isOpen: true
+        isOpen: false
     }
     openPopup = () => {
         this.setState({

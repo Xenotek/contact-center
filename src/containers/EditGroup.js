@@ -1,29 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {createGroup, openModal} from '../actions'
+import {updateGroup, openModal} from '../actions'
 import ButtonLink from '../components/ButtonLink'
-import TermsListAdd from '../components/TermsListAdd'
+import TermsListEdit from '../components/TermsListEdit'
 import Description from '../components/Description'
 import uuid from 'uuid'
 
 
-export class AddGroup extends React.Component {
+export class EditGroup extends React.Component {
 
     state = {
-        terms: [AddGroup.initTerm()],
-        description: ''
+        id: this.props.group.id,
+        terms: this.props.group.terms,
+        description: this.props.group.description
     }
-
+    static id = -1
     static initTerm() {
         return {
-            id: uuid.v4(),
+            id: EditGroup.id--,
             title: ''
         }
     }
 
     addTerm = (e) => {
         this.setState({
-            terms: [...this.state.terms, AddGroup.initTerm()]
+            terms: [...this.state.terms, EditGroup.initTerm()]
         })
     }
 
@@ -35,6 +36,7 @@ export class AddGroup extends React.Component {
             title: 'Подтвердите удаление',
             text: 'Вы действительно хотите удалить термин?',
             onConfirm: () => {
+                console.log('id', this.state.terms.filter(term => term.id !== id));
                 this.setState({
                     terms: this.state.terms.filter(term => term.id.toString() !== id)
                 })
@@ -52,8 +54,8 @@ export class AddGroup extends React.Component {
 
     onChangeInput = (e) => {
         // console.log(e.target.value);
-        let id = e.target.getAttribute('data-id')
-        console.log('onChangeInput id', id);
+        let id = +e.target.getAttribute('data-id')
+        // console.log('onChangeInput id', id);
         let newTerms = this.state.terms.map(term => {
             if (term.id === id) {
                 return {
@@ -68,27 +70,18 @@ export class AddGroup extends React.Component {
         })
     }
 
-    submitGroup = (e) => {
-        let data = {
-            description: this.state.description,
-            terms: this.state.terms.map((term)=>{
-                return {title: term.title}
-            })
-        }
-
-        this.props.createGroup(data);
-        this.props.closeAddPopup(e)
+    updateGroupHandle = (e) => {
+        this.props.updateGroup({...this.state})
     }
 
     render() {
-
         return (
             <div className="group">
-                <TermsListAdd onChangeInput={this.onChangeInput} add={this.addTerm} remove={this.removeTerm} terms={this.state.terms}/>
-                <Description onChangeDescription={this.onChangeDescription}/>
+                <TermsListEdit onChangeInput={this.onChangeInput} add={this.addTerm} remove={this.removeTerm} terms={this.state.terms}/>
+                <Description onChangeDescription={this.onChangeDescription} value={this.state.description} />
                 <div className="group__buttons">
-                    <ButtonLink variant="icon-ok" onClick={this.submitGroup}>Сохранить</ButtonLink>
-                    <ButtonLink variant="icon-cancel button-grey" onClick={this.props.closeAddPopup}>Отменить</ButtonLink>
+                    <ButtonLink variant="icon-ok" onClick={this.updateGroupHandle}>Сохранить</ButtonLink>
+                    <ButtonLink variant="icon-cancel button-grey" onClick={this.props.close}>Отменить</ButtonLink>
                 </div>
             </div>
         )
@@ -96,4 +89,4 @@ export class AddGroup extends React.Component {
 }
 
 
-export default connect(null, {createGroup, openModal})(AddGroup)
+export default connect(null, {updateGroup, openModal})(EditGroup)

@@ -139,12 +139,16 @@ textarea{
 }
 
 .glossary__buttons{
-  padding: 5px 25px;
+  padding: 15px 25px;
   border-top: 1px solid #ccc;
+  /*position: absolute;
+  bottom: 0;
+  width: 100%;*/
 }
 
 .glossary-search{
   margin: 15px 25px;
+  margin-bottom: 30px;
   position: relative;
 }
 
@@ -204,7 +208,12 @@ textarea{
 }
 .groups{
   display: flex;
-  margin: 25px;
+  margin: 15px 25px;
+  border-top: 1px solid #ccc;
+  padding-top: 13px;
+}
+.groups:first-of-type{
+  border-top: none;
 }
 
 .group__terms{
@@ -217,7 +226,7 @@ textarea{
 .group__buttons{
   display: flex;
   flex-direction: column;
-  width: 100px;
+  width: 70px;
   align-items: flex-start;
   margin: 0 10px;
 }

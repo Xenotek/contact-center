@@ -4,12 +4,15 @@ import TermsList from '../components/TermsList'
 import Description from '../components/Description'
 import ButtonLink from '../components/ButtonLink'
 import SearchBar from '../components/SearchBar'
+import EditGroup from '../containers/EditGroup'
 import { openModal, deleteGroup } from '../actions'
 import uuid from 'uuid';
 
 export class Groups extends React.PureComponent {
     state = {
-        groups: this.props.groups
+        groups: this.props.groups,
+        isEdit: false,
+        editGroupId: -1
     }
 
     filterByText = (text) => {
@@ -20,28 +23,46 @@ export class Groups extends React.PureComponent {
             })
         })
     }
+
+    editGroup = (e) => {
+        const id = +e.target.closest('.button-action').getAttribute('data-id');
+        this.setState({
+            isEdit: true,
+            editGroupId: id
+        })
+    }
+
+    cancelEditGroup = () => {
+        this.setState({
+            isEdit: false,
+            editGroupId: -1
+        })
+    }
+
     removeGroup = (e) => {
-        const id = e.target.closest('.button-action').getAttribute('data-id');
-        console.log('id',id);
+        const id = +e.target.closest('.button-action').getAttribute('data-id');
         this.props.openModal({
             id: uuid.v4(),
             type: 'confirmation',
             title: 'Удаление группы терминов',
             text: 'Вы действительно хотите удалить группу терминов?',
-            onConfirm: () => this.props.deleteGroup(id),
+            onConfirm: () => this.props.deleteGroup({id}),
         })
     }
 
     render() {
-        const {groups} = this.state;
+        const {groups, isEdit} = this.state;
 
         return (
             <Fragment>
                 <SearchBar filter={this.filterByText}/>
+                <div className="groups-list">
                 {
                     groups.map((group) => {
+                        if (isEdit && group.id === this.state.editGroupId) {
+                            return <EditGroup key={group.id} close={this.cancelEditGroup} group={group} />
+                        }
                         return (
-
                             <div className="groups" key={group.id}>
                                 <TermsList terms={group.terms}/>
                                 <Description>{group.description}</Description>
@@ -50,12 +71,13 @@ export class Groups extends React.PureComponent {
                                     <ButtonLink data-id={group.id} variant="button-action icon-cancel button-red"
                                                 onClick={this.removeGroup}>Удалить</ButtonLink>
                                     <ButtonLink data-id={group.id} variant="button-action icon-edit "
-                                                onClick={this.props.editGroup}>Изменить</ButtonLink>
+                                                onClick={this.editGroup}>Изменить</ButtonLink>
                                 </div>
                             </div>
                         )
                     })
                 }
+                </div>
             </Fragment>
         )
     }
