@@ -66,8 +66,56 @@ const createGroup = (state = {isFetching: false}, action) => {
     }
 }
 
+const updateGroup = (state = {isFetching: false}, action) => {
+    switch (action.type) {
+        case type.UPDATE_GROUP_REQUEST:
+            return {
+                ...state,
+                isFetching: true
+            }
+        case type.UPDATE_GROUP_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            }
+        case type.UPDATE_GROUP_FAILURE:
+            return {
+                ...state,
+                err: action.err,
+                isFetching: false
+            }
+        default:
+            return state;
+    }
+}
+
+const deleteGroup = (state = {isFetching: false}, action) => {
+    switch (action.type) {
+        case type.DELETE_GROUP_REQUEST:
+            return {
+                ...state,
+                isFetching: true
+            }
+        case type.DELETE_GROUP_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            }
+        case type.DELETE_GROUP_FAILURE:
+            return {
+                ...state,
+                err: action.err,
+                isFetching: false
+            }
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     fetchGroups,
     createGroup,
+    updateGroup,
+    deleteGroup,
     modals
 })

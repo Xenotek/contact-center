@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux'
-import {closeModal} from '../actions'
+import {closeModal} from '../actions/index'
 import Button from '../components/Button'
 
 class MyPortal extends React.PureComponent {
@@ -76,7 +76,6 @@ class Modal extends Component {
 
 class Modals extends Component {
     render() {
-        console.log('this.props.modals', this.props.modals);
         if (!this.props.modals.length) {
            return null
         }

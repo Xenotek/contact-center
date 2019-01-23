@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {createGroup} from '../actions'
+import {createGroup, openModal} from '../actions'
 import ButtonLink from '../components/ButtonLink'
 import TermsListAdd from '../components/TermsListAdd'
 import Description from '../components/Description'
@@ -28,9 +28,18 @@ export class AddGroup extends React.Component {
 
     removeTerm = (e) => {
         let id = e.target.getAttribute('data-id')
-        this.setState({
-            terms: this.state.terms.filter(term => term.id !== id)
+        this.props.openModal({
+            id: uuid.v4(),
+            type: 'confirmation',
+            title: 'Подтвердите удаление',
+            text: 'Вы действительно хотите удалить термин?',
+            onConfirm: () => {
+                this.setState({
+                    terms: this.state.terms.filter(term => term.id !== id)
+                })
+            }
         })
+
     }
 
     onChangeDescription = (e) => {
@@ -62,13 +71,9 @@ export class AddGroup extends React.Component {
             description: this.state.description,
             terms: this.state.terms
         }
-        console.log(data);
+        // console.log(data);
 
         this.props.createGroup(data);
-    }
-
-    componentWillUnmount(){
-        // console.log("componentWillUnmount()");
     }
 
     render() {
@@ -96,4 +101,4 @@ export class AddGroup extends React.Component {
 //     }
 // }
 //
-export default connect(null, {createGroup})(AddGroup)
+export default connect(null, {createGroup, openModal})(AddGroup)

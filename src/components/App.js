@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import '../style.css'
-import Glossary from '../components/Glossary'
+import Glossary from '../containers/Glossary'
 import Popup from '../components/Popup'
 import Button from '../components/Button'
-import ModalContainer from '../components/Modal'
+import ModalContainer from '../containers/Modal'
 
 class App extends Component {
     state = {

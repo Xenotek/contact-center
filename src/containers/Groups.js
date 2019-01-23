@@ -4,7 +4,7 @@ import TermsList from '../components/TermsList'
 import Description from '../components/Description'
 import ButtonLink from '../components/ButtonLink'
 import SearchBar from '../components/SearchBar'
-import { openModal } from '../actions'
+import { openModal, deleteGroup } from '../actions'
 import uuid from 'uuid';
 
 export class Groups extends React.PureComponent {
@@ -21,23 +21,14 @@ export class Groups extends React.PureComponent {
         })
     }
     removeGroup = (e) => {
+        const id = e.target.closest('.button-action').getAttribute('data-id');
+        console.log('id',id);
         this.props.openModal({
             id: uuid.v4(),
             type: 'confirmation',
             title: 'Удаление группы терминов',
             text: 'Вы действительно хотите удалить группу терминов?',
-            onClose: () => console.log("fire at closing event"),
-            onConfirm: () => console.log("fire at confirming event"),
-        })
-    }
-    removeTerm = (e) => {
-        this.props.openModal({
-            id: uuid.v4(),
-            type: 'confirmation',
-            title: 'Удаление группы терминов',
-            text: 'Вы действительно хотите удалить группу терминов?',
-            onClose: () => console.log("fire at closing event"),
-            onConfirm: () => console.log("fire at confirming event"),
+            onConfirm: () => this.props.deleteGroup(id),
         })
     }
 
@@ -56,9 +47,9 @@ export class Groups extends React.PureComponent {
                                 <Description>{group.description}</Description>
                                 {/*<Description edit={false} onChangeDescription={this.onChangeDescription}/>*/}
                                 <div className="group__buttons">
-                                    <ButtonLink data-id={group.id} variant="icon-cancel button-red"
+                                    <ButtonLink data-id={group.id} variant="button-action icon-cancel button-red"
                                                 onClick={this.removeGroup}>Удалить</ButtonLink>
-                                    <ButtonLink data-id={group.id} variant="icon-edit "
+                                    <ButtonLink data-id={group.id} variant="button-action icon-edit "
                                                 onClick={this.props.editGroup}>Изменить</ButtonLink>
                                 </div>
                             </div>
@@ -71,4 +62,4 @@ export class Groups extends React.PureComponent {
 
 }
 
-export default connect(null, {openModal})(Groups)
+export default connect(null, {openModal, deleteGroup})(Groups)

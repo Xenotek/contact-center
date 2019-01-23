@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchGroups} from '../actions'
-import Groups from '../containers/Groups';
-import AddGroup from '../containers/AddGroup';
+import {fetchGroups} from '../actions/index'
+import Groups from './Groups';
+import AddGroup from './AddGroup';
 import ButtonLink from '../components/ButtonLink';
 
 export class Glossary extends React.Component {
