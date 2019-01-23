@@ -1,37 +1,52 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { fetchGroups } from '../actions'
+import React, {Fragment} from 'react'
+import TermsList from '../components/TermsList'
+import Description from '../components/Description'
+import ButtonLink from '../components/ButtonLink'
+import SearchBar from '../components/SearchBar'
 
 export class Groups extends React.PureComponent {
+    state = {
+        groups: this.props.groups
+    }
 
-    componentDidMount() {
-        this.props.fetchGroups()
+    filterByText = (text) => {
+// console.log('this.props.groups', this.props.groups);
+        this.setState({
+            groups: this.props.groups.filter(function (item) {
+                const foundedTerms = item.terms.filter(term => term.title.toLowerCase().includes(text))
+                return item.description.toLowerCase().includes(text) || foundedTerms.length
+            })
+        })
     }
 
     render() {
-        const { groups, loading } = this.props;
+        const {groups} = this.state;
 
-        if (loading) {
-            return (
-                <div>Загрузка...</div>
-            )
-        }
-        return groups.map((item) => {
-            return (
-                <div
-                    key={item.id}
-                    {...item}
-                >{item.id}</div>
-            )
-        })
+        return (
+            <Fragment>
+                <SearchBar filter={this.filterByText}/>
+                {
+                    groups.map((group) => {
+                        return (
+
+                            <div className="groups" key={group.id}>
+                                <TermsList terms={group.terms}/>
+                                <Description>{group.description}</Description>
+                                {/*<Description edit={false} onChangeDescription={this.onChangeDescription}/>*/}
+                                <div className="group__buttons">
+                                    <ButtonLink variant="icon-cancel button-red"
+                                                onClick={this.removeGroup}>Удалить</ButtonLink>
+                                    <ButtonLink variant="icon-edit "
+                                                onClick={this.props.editGroup}>Изменить</ButtonLink>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </Fragment>
+        )
     }
+
 }
 
-const mapStateToProps = (state) => {
-    return {
-        groups: state.fetchGroups.groups,
-        loading: state.fetchGroups.isFetching
-    }
-}
-
-export default connect(mapStateToProps, {fetchGroups})(Groups)
+export default Groups

@@ -1,10 +1,10 @@
 import React from 'react'
-import ButtonLink from '../components/ButtonLink';
+// import ButtonLink from '../components/ButtonLink';
 
 const Term = (props) => {
     return (
         <div className="terms__item">
-            <input onChange={props.onChangeDescription}/>
+            {props.title}
         </div>
     )
 }
@@ -12,18 +12,12 @@ const Term = (props) => {
 const TermsList = (props) => {
 
     const terms = props.terms.map((item) => {
-        return (
-            <Term
-                key={item.id}
-                {...item}
-            >{item.id}</Term>
-        )
+        return item.title
     })
 
     return (
-        <div className="terms">
-            {terms}
-            <ButtonLink variant="icon-add">Добавить термин</ButtonLink>
+        <div className="group__terms">
+            {terms.join(', ')}
         </div>
     )
 

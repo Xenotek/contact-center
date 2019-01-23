@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import '../style.css';
-import Glossary from '../components/Glossary';
-import Popup from '../components/Popup';
-import Button from '../components/Button';
+import React, {Component} from 'react'
+import '../style.css'
+import Glossary from '../components/Glossary'
+import Popup from '../components/Popup'
+import Button from '../components/Button'
 
 class App extends Component {
 
     state = {
-        isOpen: false
+        isOpen: true
     }
 
     openPopup = () => {
@@ -23,7 +23,7 @@ class App extends Component {
     }
 
     render() {
-        const { isOpen } = this.state;
+        const { isOpen } = this.state
         return (
             <div className="app">
                 <Button onClick={this.openPopup}>Глоссарий</Button>
@@ -31,8 +31,8 @@ class App extends Component {
                     <Glossary />
                 </Popup>
             </div>
-        );
+        )
     }
 }
 
-export default App;
+export default App

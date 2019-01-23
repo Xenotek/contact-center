@@ -37,8 +37,7 @@ const createGroupRequest = () => ({
 })
 
 const createGroupSuccess = ({ data }) => ({
-    type: type.CREATE_GROUP_SUCCESS,
-    items: data
+    type: type.CREATE_GROUP_SUCCESS
 })
 
 const createGroupFailure = (err) => ({
@@ -51,7 +50,7 @@ export const createGroup = (data) => dispatch => {
 
     API.createGroup(data)
         .then(res => {
-            // console.log('res', res)
+            console.log('res', res)
             if(res.status === 200){
                 dispatch(createGroupSuccess(res))
             }else {

@@ -25,7 +25,7 @@ const fetchGroups = (state = {isFetching: false, groups: []}, action) => {
     }
 }
 
-const createGroup = (state = {isFetching: false, groups: []}, action) => {
+const createGroup = (state = {isFetching: false}, action) => {
     switch (action.type) {
         case type.CREATE_GROUP_REQUEST:
             return {
@@ -35,8 +35,7 @@ const createGroup = (state = {isFetching: false, groups: []}, action) => {
         case type.CREATE_GROUP_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
-                groups: action.items,
+                isFetching: false
             }
         case type.CREATE_GROUP_FAILURE:
             return {
