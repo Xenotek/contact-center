@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {createGroup} from '../actions'
 import ButtonLink from '../components/ButtonLink'
 import TermsListAdd from '../components/TermsListAdd'
-import { randomMAX } from '../utils/random'
 import Description from '../components/Description'
+import uuid from 'uuid'
 
 export class AddGroup extends React.Component {
 
@@ -15,7 +15,7 @@ export class AddGroup extends React.Component {
 
     static initTerm() {
         return {
-            id: 'random'+randomMAX(),
+            id: 'random'+uuid.v4(),
             title: ''
         }
     }

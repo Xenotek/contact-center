@@ -8,6 +8,8 @@ export const CREATE_GROUP_SUCCESS = 'CREATE_GROUP_SUCCESS'
 export const CREATE_GROUP_FAILURE = 'CREATE_GROUP_FAILURE'
 
 
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 
 

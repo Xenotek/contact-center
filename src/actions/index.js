@@ -1,6 +1,21 @@
 import * as type from '../constants'
 import * as API from '../api'
 
+
+export const openModal = (obj) => {
+    return {
+        type: type.OPEN_MODAL,
+        obj,
+    }
+}
+export const closeModal = (obj) => {
+    return {
+        type: type.CLOSE_MODAL,
+        obj,
+    }
+}
+
+
 const fetchGroupsRequest = () => ({
     type: type.FETCH_GROUPS_REQUEST
 })

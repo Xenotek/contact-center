@@ -38,6 +38,7 @@ export class Glossary extends React.Component {
                 { !isAdding && <div className="glossary__buttons"><ButtonLink variant="icon-add" onClick={this.openAddPopup}>Добавить
                     термин / группу терминов</ButtonLink></div> }
                 { isAdding && <AddGroup closeAddPopup={this.closeAddPopup}/> }
+
             </div>
         )
     }

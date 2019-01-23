@@ -1,6 +1,24 @@
 import { combineReducers } from 'redux'
 import * as type from '../constants'
 
+function modals(state = { modals: []}, action) {
+    switch (action.type) {
+        case type.OPEN_MODAL:
+            return {
+                ...state,
+                modals: state.modals.concat(action.obj)
+            };
+        case type.CLOSE_MODAL:
+            return {
+                ...state,
+                modals: state.modals.filter(item => item.id !== action.obj.id),
+            };
+        default:
+            return state;
+    }
+}
+
+
 const fetchGroups = (state = {isFetching: false, groups: []}, action) => {
     switch (action.type) {
         case type.FETCH_GROUPS_REQUEST:
@@ -50,5 +68,6 @@ const createGroup = (state = {isFetching: false}, action) => {
 
 export default combineReducers({
     fetchGroups,
-    createGroup
+    createGroup,
+    modals
 })
